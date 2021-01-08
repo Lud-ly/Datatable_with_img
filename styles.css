@@ -1,0 +1,173 @@
+
+.dataTables_wrapper {
+  margin: 0 2em;
+}
+.dataTables_length, .dataTables_filter, .dataTables_info, .dataTables_paginate {
+  font-size: 0.7em;
+  text-transform: uppercase;
+  margin-bottom: 2em;
+}
+table.dataTable {
+  margin-bottom: 2em;
+}
+.table {
+  background-color: #fff;
+}
+.table thead, .table tfoot {
+  font-size: 0.7em;
+  text-transform: uppercase;
+}
+.table tbody label {
+  display: none;
+  margin-right: 5px;
+  width: 50px;
+}
+.table > tbody > tr > td {
+  padding: 1em 8px;
+}
+.table .photo {
+  width: 22px;
+  margin: 0 auto;
+}
+.table .photo img {
+  border-radius: 50%;
+  width: 100%;
+  height: auto;
+}
+table.cards {
+  background-color: transparent;
+}
+.cards thead, .cards tfoot {
+  display: none;
+}
+.cards tbody .photo {
+  width: 100px;
+  border-radius: 0;
+}
+.cards tbody tr {
+  float: left;
+  width: 22%;
+  height: 280px;
+  position: relative;
+  overflow: hidden;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  background-color: #ffffff !important;
+}
+.cards tbody tr:first-child td {
+  border-top: 1px solid #ddd !important;
+}
+.cards tbody tr td {
+  padding: 12px;
+  font-size: 80%;
+  text-align: center;
+  display: none;
+}
+.cards tbody tr td:nth-child(1), .cards tbody tr td:nth-child(2), .cards tbody tr td:nth-child(3), .cards tbody tr td:nth-child(4) {
+  display: block;
+}
+.cards tbody tr td:nth-child(2) {
+  display: block;
+  position: relative;
+  font-size: 100%;
+  height: 25px;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: bold;
+}
+.cards tbody tr td:nth-child(2):after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0px;
+  width: 5px;
+  height: 100%;
+  background: #fff;
+  box-shadow: 0px 0px 20px 10px #fff;
+}
+.cards tbody tr td:nth-child(3) {
+  font-size: 80%;
+  opacity: 0.5;
+}
+.cards tbody tr td:nth-child(4) {
+  font-size: 70%;
+  opacity: 0.75;
+  text-transform: uppercase;
+  border: transparent !important;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 5px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.cards tbody td {
+  display: block;
+  overflow: hidden;
+  text-align: left;
+}
+.cards .glyphicon {
+  font-size: 75px;
+}
+.cards tbody label {
+  display: inline;
+  position: relative;
+  font-size: 85%;
+  font-weight: normal;
+  top: -5px;
+  left: -3px;
+  float: left;
+  color: #808080;
+}
+.cards tbody td:nth-child(1) {
+  text-align: center;
+}
+.btn {
+  margin: 2em;
+}
+select.nav {
+  margin: 2em 2em;
+}
+.nav {
+  /* margin: 0 2em 2em 2em; */
+  display: flex!important;
+ flex-direction: column!important;
+ align-items: center!important;
+ justify-content: left!important;
+}
+.nav a {
+ 
+  cursor: pointer;
+}
+.nav a:hover{
+background-color: orange;
+opacity: 0.5;
+}
+/* Portrait tablets and small desktops */
+@media (max-width: 1200px) {
+  .nav li {
+    float: left;
+  }
+  .cards tbody .photo {
+    width: 100px;
+    border-radius: 0;
+  }
+  .cards tbody tr {
+    float: left;
+    width: 42%;
+    height: 250px;
+  }
+}
+@media (max-width: 768px) {
+  .nav li {
+    float: left;
+  }
+  .cards tbody .photo {
+    width: 100px;
+  }
+  .cards tbody tr {
+    float: left;
+    width: 100%;
+    height: 250px;
+  }
+}

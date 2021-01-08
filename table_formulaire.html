@@ -1,0 +1,1120 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>TP FORMULAIRE</title>
+	<meta charset="utf-8">
+	<meta name="description" content="TP FORMULAIRE">
+	<!-- For Internet Explhorreur : to force css3 -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<!-- Tablettes 'n' Mobiles -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- main css and js -->
+
+	<script type="text/javascript" src="jquery_3_5_1.js"></script>
+	<link rel="stylesheet" type="text/css" href="datatables.min.css">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+	<script type="text/javascript" charset="utf8" src="datatables.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="Js/index.js"></script>
+	<script type="text/javascript" charset="utf8" src="myData.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"></script>
+
+
+
+	<!-- main css and js -->
+	<style type="text/css">
+		input[type=text] {
+			border: none;
+			border-bottom: 1px solid #FF0000;
+		}
+
+		.input_nombre {
+			padding-left: 18px;
+			background-image: url(../img/number.png);
+			background-repeat: no-repeat;
+			background-position: left;
+		}
+
+		button {
+			text-decoration: none;
+			font-family: Verdana, Arial;
+			font-weight: bold;
+			font-size: 11 px;
+			border-radius: 4px 4px 4px 4px;
+			cursor: pointer;
+			height: 40px;
+		}
+
+		.btn_action {
+			background-color: #5bd39a;
+			color: white;
+			border: 2px solid #5bd39a;
+		}
+
+		.btn_action:hover {
+			background-color: White;
+			color: #5bd39a;
+			border: 2px solid #5bd39a;
+			transition-duration: 2s;
+		}
+
+		.btn_save {
+			background-color: #ff0000;
+			color: white;
+			border: 2px solid #ff0000;
+		}
+
+		.btn_save:hover {
+			background-color: White;
+			color: #ff0000;
+			border: 2px solid #ff0000;
+			transition-duration: 1s;
+		}
+
+		.hide {
+			display: none;
+		}
+	</style>
+	<script language="JavaScript">
+
+		var aOfPersonnes = [];
+		aOfPersonnes[0] = [];
+		aOfPersonnes[0]["prenom"] = "Guillian";
+		aOfPersonnes[0]["nom"] = "Aufrère";
+		aOfPersonnes[0]["age"] = "24";
+		aOfPersonnes[0]["tel"] = "0600000001";
+		aOfPersonnes[0]["mail"] = "Guillian@afpa.fr";
+
+		aOfPersonnes[1] = [];
+		aOfPersonnes[1]["prenom"] = "Julie";
+		aOfPersonnes[1]["nom"] = "Barenne";
+		aOfPersonnes[1]["age"] = "27";
+		aOfPersonnes[1]["tel"] = "0600000002";
+		aOfPersonnes[1]["mail"] = "Julie@afpa.fr";
+
+		aOfPersonnes[2] = [];
+		aOfPersonnes[2]["prenom"] = "Benjamin";
+		aOfPersonnes[2]["nom"] = "Roma-Sacconney";
+		aOfPersonnes[2]["age"] = "28";
+		aOfPersonnes[2]["tel"] = "0600000003";
+		aOfPersonnes[2]["mail"] = "Benjamin@afpa.fr";
+
+		aOfPersonnes[3] = [];
+		aOfPersonnes[3]["prenom"] = "Aurelien";
+		aOfPersonnes[3]["nom"] = "Bernal";
+		aOfPersonnes[3]["age"] = "34";
+		aOfPersonnes[3]["tel"] = "0600000004";
+		aOfPersonnes[3]["mail"] = "Aurelien@afpa.fr";
+
+		aOfPersonnes[4] = [];
+		aOfPersonnes[4]["prenom"] = "Jacques";
+		aOfPersonnes[4]["nom"] = "Coja";
+		aOfPersonnes[4]["age"] = "30";
+		aOfPersonnes[4]["tel"] = "0600000005";
+		aOfPersonnes[4]["mail"] = "Jacques@afpa.fr";
+
+		aOfPersonnes[5] = [];
+		aOfPersonnes[5]["prenom"] = "JiJou";
+		aOfPersonnes[5]["nom"] = "Pagan";
+		aOfPersonnes[5]["age"] = "29";
+		aOfPersonnes[5]["tel"] = "0600000006";
+		aOfPersonnes[5]["mail"] = "JiJou@afpa.fr";
+
+		function constructTable() {
+			var i;
+
+			var sHTML = "";
+			sHTML += "<thead>";
+			sHTML += "<tr>";
+			sHTML += "<td>Prénom</td>";
+			sHTML += "<td>Nom</td>";
+			sHTML += "<td>Email</td>";
+			sHTML += "<td>Editer</td>";
+			sHTML += "<td>Supprimer</td>";
+			sHTML += "</tr>";
+			sHTML += "</thead>";
+			sHTML += "<tbody>";
+
+			for (i = 0; i < aOfPersonnes.length; i++) {
+				sHTML += "<tr>";
+				sHTML += "<td>" + aOfPersonnes[i]["prenom"] + "</td>";
+				sHTML += "<td>" + aOfPersonnes[i]["nom"] + "</td>";
+				sHTML += "<td>" + aOfPersonnes[i]["mail"] + "</td>";
+				sHTML += "<td onClick=\"editPersonne(" + i + ")\">Editer</td>";
+				sHTML += "<td>Supprimer</td>";
+				sHTML += "</tr>";
+			}
+
+			sHTML += "</tbody>";
+			$('#table_personnes').html(sHTML);
+		}
+
+		function ajoutPersonne() {
+			// Longueur actuel du tableau JS :
+			var iLongueur = aOfPersonnes.length;
+
+			// ajout une personne en fin de tableau JS
+			aOfPersonnes[iLongueur] = [];
+			aOfPersonnes[iLongueur]["prenom"] = $('#prenom').val();
+			aOfPersonnes[iLongueur]["nom"] = $('#nom').val();
+			aOfPersonnes[iLongueur]["age"] = $('#age').val();
+			aOfPersonnes[iLongueur]["tel"] = $('#telephone').val();
+			aOfPersonnes[iLongueur]["mail"] = $('#email').val();
+
+			// Reconstruire le tableau HTML
+			rebuildDatable();
+
+			// Vider le formulaire
+			videFormulaire();
+		}
+
+		function rebuildDatable() {
+			$('#table_personnes').html("");
+			tables.clear();
+			tables.destroy();
+			constructTable();
+			tables = $('#table_personnes').DataTable(configuration);
+		}
+
+		function videFormulaire() {
+		}
+
+		function majPersonne() {
+			// Modifier les éléments du tableau dont l'indice est iIndiceEditEnCours
+
+			// Reconstruire le tableau HTML
+
+			// Vider le formulaire
+
+			// Remettre mes boutons correctement
+
+		}
+
+		function supprimPersonne() {
+		}
+
+		var iIndiceEditEnCours;
+
+		function editPersonne(iIndiceEdit) {
+			alert("iIndiceEdit = " + iIndiceEdit);
+			iIndiceEditEnCours = iIndiceEdit;
+			// J'édite la personne en question
+			$('#prenom').val(aOfPersonnes[iIndiceEdit]["prenom"]);
+			$('#nom').val(aOfPersonnes[iIndiceEdit]["nom"]);
+			$('#age').val(aOfPersonnes[iIndiceEdit]["age"]);
+			$('#telephone').val(aOfPersonnes[iIndiceEdit]["tel"]);
+			$('#email').val(aOfPersonnes[iIndiceEdit]["mail"]);
+
+			// cacher le bouton ajouter
+
+			// Montrer le bouton modifier
+
+			// Montrer le bouton annuler
+		}
+
+		// CONFIGURATION DATATABLE
+		const configuration = {
+			"stateSave": false,
+			"order": [[1, "asc"]],
+			"pagingType": "simple_numbers",
+			"searching": true,
+			"lengthMenu": [[10, 25, 50, 100, -1], ["Dix", "Vingt cinq", "Cinquante", "Cent", "Ze total stp"]],
+			"language": {
+				"info": "Utilisateurs _START_ à _END_ sur _TOTAL_ sélectionnées",
+				"emptyTable": "Aucun utilisateur",
+				"lengthMenu": "_MENU_ Utilisateurs par page",
+				"search": "Rechercher : ",
+				"zeroRecords": "Aucun résultat de recherche",
+				"paginate": {
+					"previous": "Précédent",
+					"next": "Suivant"
+				},
+				"sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+				"sInfoEmpty": "Utilisateurs 0 à 0 sur 0 sélectionnée",
+			},
+			"columns": [
+				{
+					"orderable": true
+				},
+				{
+					"orderable": true
+				},
+				{
+					"orderable": true
+				},
+				{
+					"orderable": false
+				},
+				{
+					"orderable": false
+				}
+			],
+			'retrieve': true
+		};
+
+		var tables;
+		$(document).ready(function () {
+			constructTable();
+			// INIT DATATABLE
+			tables = $('#table_personnes').DataTable(configuration);
+		});
+
+		//Datatables numero 2---------------------------
+		$(document).ready(function () {
+			var tags = $('#tags');
+			var tags2 = $('#tags2');
+			var tableDT = $('#example').DataTable({
+				dom: 'lfrtip',
+				//sDom: '', // Hiding the datatables ui
+				//bLengthChange: false,
+				ordering: false,
+				oLanguage: {
+					sUrl: "http://cdn.datatables.net/plug-ins/1.10.15/i18n/French.json"
+				},
+				initComplete: initFilter
+			});
+
+			function initFilter() {
+				var list = [];
+				var list2 = {};
+				var tableTag = tableDT.column(3);
+				//console.log(tableTag.data());
+				// get tags
+				tableTag.data().each(function (value, index) {
+					var re = /[$,]/;
+					if ((re).test(value)) {
+						var val = value.split(re); //
+						//console.log(val);
+						//list.concat(val)
+						list.push(val);
+					} else {
+						list.push(value);
+					}
+				});
+				console.log(list);
+				// count tags
+				list.forEach(function (x) {
+					list2[x] = (list2[x] || 0) + 1;
+				});
+				var list = []; // set null   
+				// push data
+				Object.keys(list2).forEach(function (key) {
+					list.push({ city: key, count: list2[key] });
+				});
+				// sort data
+				list.sort(function (a, b) { return (b.count > a.count) ? 1 : ((a.count > b.count) ? -1 : 0); });
+				// build <select>
+				$.each(list, function (key, value) {
+					var $value = value.city, $text = value.city + ' (' + value.count + ')';
+					tags.append($("<option></option>").attr("value", $value).text($text));
+				});
+				// change <select>
+				tags.on('change', function () {
+					var val = $.fn.dataTable.util.escapeRegex($(this).val());
+					tableTag
+						.search(val ? '^' + val + '$' : '', true, false)
+						.draw();
+				});
+				// build <li>
+				$.each(list, function (key, value) {
+					var $value = value.city, $text = value.city + ' (' + value.count + ')';
+					tags2.append(
+						$("<li><a href='#' data-value='" + $value + "'>" + $text + "</a></li>")
+					);
+				});
+				tags2.find('a').on('click', function (e) {
+					e.preventDefault();
+					var val = $.fn.dataTable.util.escapeRegex($(this).attr('data-value'));
+					tableTag
+						.search(val ? '^' + val + '$' : '', true, false)
+						.draw();
+				});
+
+				$('#btToggleDisplay').on('click', function () {
+					$("#example").toggleClass('cards')
+					//$("#example thead, #example tfoot").toggle()
+				})
+
+			} //initTag
+		});
+
+
+	</script>
+</head>
+
+<body>
+
+	<div id="page">
+		<header>
+			<!-- Entête de la zone considérée -->
+		</header>
+
+		<nav>
+			<!-- Nav. principale de la page -->
+		</nav>
+
+		<aside>
+			<!-- Les à-cotés de la page -->
+		</aside>
+
+		<!-- Contenu textuel de la page -->
+		<section>
+			<table id="table_personnes" border="1">
+			</table>
+			<p>Prénom : <input type="text" name="prenom" id="prenom"></p>
+			<p>Nom : <input type="text" name="nom" id="nom"></p>
+			<p>Age : <input type="text" name="age" id="age"></p>
+			<p>Téléphone : <input type="text" name="telephone" id="telephone"></p>
+			<p>Email : <input type="text" name="email" id="email"></p>
+			<p>
+				<button onClick="ajoutPersonne()" class="btn_action" id="btn_ajouter">AJOUTER</button>
+				&nbsp;&nbsp;&nbsp;
+				<button onClick="majPersonne()" class="btn_action hide" id="btn_modifier">MODIFIER</button>
+				&nbsp;&nbsp;&nbsp;
+				<button onClick="annulPersonne()" class="btn_save hide" id="btn_annuler">ANNULER</button>
+			</p>
+		</section>
+
+		<section>
+			<div class="row">
+				<div class="col-sm-12 text-center">
+					<button id="btToggleDisplay" class="btn btn-info">Toggle table and card view</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2">
+					<select class="nav" id="tags">
+						<option value="">All</option>
+					</select>
+					<ul class="nav" id="tags2">
+						<li><a href="#" data-value="">ALL</a></li>
+					</ul>
+				</div>
+				<div class="col-sm-10">
+					<table id="example" class="table display cards" cellspacing="0" width="100%">
+						<thead>
+							<tr>
+								<th class="th_photo">Photo</th>
+								<th class="th_name">Name</th>
+								<th>Position</th>
+								<th>Office</th>
+								<th>Age</th>
+								<th>Start date</th>
+								<th>Salary</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>Photo</th>
+								<th>Name</th>
+								<th>Position</th>
+								<th>Office</th>
+								<th>Age</th>
+								<th>Start date</th>
+								<th>Salary</th>
+							</tr>
+						</tfoot>
+						<tbody>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/5.jpg" alt=""></div>
+								</td>
+								<td>Константин Ивановский</td>
+								<td>System Architect</td>
+								<td>Edinburgh</td>
+								<td>61</td>
+								<td>2011/04/25</td>
+								<td>$320,800</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/45.jpg" alt=""></div>
+								</td>
+								<td>Garrett Winters</td>
+								<td>Accountant</td>
+								<td>Tokyo</td>
+								<td>63</td>
+								<td>2011/07/25</td>
+								<td>$170,750</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/55.jpg" alt=""></div>
+								</td>
+								<td>Ashton Cox</td>
+								<td>Junior Technical Author</td>
+								<td>San Francisco</td>
+								<td>66</td>
+								<td>2009/01/12</td>
+								<td>$86,000</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/75.jpg" alt=""></div>
+								</td>
+								<td>Салават Юлаев</td>
+								<td>Senior Javascript Developer</td>
+								<td>Янган-тау</td>
+								<td>22</td>
+								<td>2012/03/29</td>
+								<td>$433,060</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/25.jpg" alt=""></div>
+								</td>
+								<td>Airi Satou</td>
+								<td>Accountant</td>
+								<td>Tokyo</td>
+								<td>33</td>
+								<td>2008/11/28</td>
+								<td>$162,700</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/55.jpg" alt=""></div>
+								</td>
+								<td>Brielle Williamson</td>
+								<td>Integration Specialist</td>
+								<td>New York</td>
+								<td>61</td>
+								<td>2012/12/02</td>
+								<td>$372,000</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/5.jpg" alt=""></div>
+								</td>
+								<td>Herrod Chandler</td>
+								<td>Sales Assistant</td>
+								<td>San Francisco</td>
+								<td>59</td>
+								<td>2012/08/06</td>
+								<td>$137,500</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/6.jpg" alt=""></div>
+								</td>
+								<td>Rhona Davidson</td>
+								<td>Integration Specialist</td>
+								<td>Tokyo</td>
+								<td>55</td>
+								<td>2010/10/14</td>
+								<td>$327,900</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/1.jpg" alt=""></div>
+								</td>
+								<td>Colleen Hurst</td>
+								<td>Javascript Developer</td>
+								<td>San Francisco</td>
+								<td>39</td>
+								<td>2009/09/15</td>
+								<td>$205,500</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/8.jpg" alt=""></div>
+								</td>
+								<td>Sonya Frost</td>
+								<td>Software Engineer</td>
+								<td>Edinburgh</td>
+								<td>23</td>
+								<td>2008/12/13</td>
+								<td>$103,600</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/women/2.jpg" alt=""></div>
+								</td>
+								<td>Jena Gaines</td>
+								<td>Office Manager</td>
+								<td>London</td>
+								<td>30</td>
+								<td>2008/12/19</td>
+								<td>$90,560</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Quinn Flynn</td>
+								<td>Support Lead</td>
+								<td>Edinburgh</td>
+								<td>22</td>
+								<td>2013/03/03</td>
+								<td>$342,000</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Charde Marshall</td>
+								<td>Regional Director</td>
+								<td>San Francisco</td>
+								<td>36</td>
+								<td>2008/10/16</td>
+								<td>$470,600</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Haley Kennedy</td>
+								<td>Senior Marketing Designer</td>
+								<td>London</td>
+								<td>43</td>
+								<td>2012/12/18</td>
+								<td>$313,500</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Tatyana Fitzpatrick</td>
+								<td>Regional Director</td>
+								<td>London</td>
+								<td>19</td>
+								<td>2010/03/17</td>
+								<td>$385,750</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/8.jpg" alt=""></div>
+								</td>
+								<td>Michael Silva</td>
+								<td>Marketing Designer</td>
+								<td>London</td>
+								<td>66</td>
+								<td>2012/11/27</td>
+								<td>$198,500</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/35.jpg" alt=""></div>
+								</td>
+								<td>Paul Byrd</td>
+								<td>Chief Financial Officer (CFO)</td>
+								<td>New York</td>
+								<td>64</td>
+								<td>2010/06/09</td>
+								<td>$725,000</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/25.jpg" alt=""></div>
+								</td>
+								<td>Gloria Little</td>
+								<td>Systems Administrator</td>
+								<td>New York</td>
+								<td>59</td>
+								<td>2009/04/10</td>
+								<td>$237,500</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/55.jpg" alt=""></div>
+								</td>
+								<td>Bradley Greer</td>
+								<td>Software Engineer</td>
+								<td>London</td>
+								<td>41</td>
+								<td>2012/10/13</td>
+								<td>$132,000</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Dai Rios</td>
+								<td>Personnel Lead</td>
+								<td>Edinburgh</td>
+								<td>35</td>
+								<td>2012/09/26</td>
+								<td>$217,500</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Jenette Caldwell</td>
+								<td>Development Lead</td>
+								<td>New York</td>
+								<td>30</td>
+								<td>2011/09/03</td>
+								<td>$345,000</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Yuri Berry</td>
+								<td>Chief Marketing Officer (CMO)</td>
+								<td>New York</td>
+								<td>40</td>
+								<td>2009/06/25</td>
+								<td>$675,000</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Caesar Vance</td>
+								<td>Pre-Sales Support</td>
+								<td>New York</td>
+								<td>21</td>
+								<td>2011/12/12</td>
+								<td>$106,450</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="https://randomuser.me/api/portraits/women/5.jpg" alt=""></div>
+								</td>
+								<td>Doris Wilder</td>
+								<td>Sales Assistant</td>
+								<td>Sidney,Tokyo</td>
+								<td>23</td>
+								<td>2010/09/20</td>
+								<td>$85,600</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Angelica Ramos</td>
+								<td>Chief Executive Officer (CEO)</td>
+								<td>London</td>
+								<td>47</td>
+								<td>2009/10/09</td>
+								<td>$1,200,000</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Gavin Joyce</td>
+								<td>Developer</td>
+								<td>Edinburgh</td>
+								<td>42</td>
+								<td>2010/12/22</td>
+								<td>$92,575</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Jennifer Chang</td>
+								<td>Regional Director</td>
+								<td>Singapore</td>
+								<td>28</td>
+								<td>2010/11/14</td>
+								<td>$357,650</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Brenden Wagner</td>
+								<td>Software Engineer</td>
+								<td>San Francisco</td>
+								<td>28</td>
+								<td>2011/06/07</td>
+								<td>$206,850</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Fiona Green</td>
+								<td>Chief Operating Officer (COO)</td>
+								<td>San Francisco</td>
+								<td>48</td>
+								<td>2010/03/11</td>
+								<td>$850,000</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="https://randomuser.me/api/portraits/women/3.jpg" alt=""></div>
+								</td>
+								<td>Shou Itou</td>
+								<td>Regional Marketing</td>
+								<td>Tokyo</td>
+								<td>20</td>
+								<td>2011/08/14</td>
+								<td>$163,000</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Michelle House</td>
+								<td>Integration Specialist</td>
+								<td>Sidney</td>
+								<td>37</td>
+								<td>2011/06/02</td>
+								<td>$95,400</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Suki Burks</td>
+								<td>Developer</td>
+								<td>London</td>
+								<td>53</td>
+								<td>2009/10/22</td>
+								<td>$114,500</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Prescott Bartlett</td>
+								<td>Technical Author</td>
+								<td>London</td>
+								<td>27</td>
+								<td>2011/05/07</td>
+								<td>$145,000</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Gavin Cortez</td>
+								<td>Team Leader</td>
+								<td>San Francisco</td>
+								<td>22</td>
+								<td>2008/10/26</td>
+								<td>$235,500</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Martena Mccray</td>
+								<td>Post-Sales support</td>
+								<td>Edinburgh</td>
+								<td>46</td>
+								<td>2011/03/09</td>
+								<td>$324,050</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Unity Butler</td>
+								<td>Marketing Designer</td>
+								<td>San Francisco</td>
+								<td>47</td>
+								<td>2009/12/09</td>
+								<td>$85,675</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Howard Hatfield</td>
+								<td>Office Manager</td>
+								<td>San Francisco</td>
+								<td>51</td>
+								<td>2008/12/16</td>
+								<td>$164,500</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Hope Fuentes</td>
+								<td>Secretary</td>
+								<td>San Francisco</td>
+								<td>41</td>
+								<td>2010/02/12</td>
+								<td>$109,850</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Vivian Harrell</td>
+								<td>Financial Controller</td>
+								<td>San Francisco</td>
+								<td>62</td>
+								<td>2009/02/14</td>
+								<td>$452,500</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Timothy Mooney</td>
+								<td>Office Manager</td>
+								<td>London</td>
+								<td>37</td>
+								<td>2008/12/11</td>
+								<td>$136,200</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Jackson Bradshaw</td>
+								<td>Director</td>
+								<td>New York</td>
+								<td>65</td>
+								<td>2008/09/26</td>
+								<td>$645,750</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Olivia Liang</td>
+								<td>Support Engineer</td>
+								<td>Singapore</td>
+								<td>64</td>
+								<td>2011/02/03</td>
+								<td>$234,500</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Bruno Nash</td>
+								<td>Software Engineer</td>
+								<td>London</td>
+								<td>38</td>
+								<td>2011/05/03</td>
+								<td>$163,500</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Sakura Yamamoto</td>
+								<td>Support Engineer</td>
+								<td>Tokyo</td>
+								<td>37</td>
+								<td>2009/08/19</td>
+								<td>$139,575</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Thor Walton</td>
+								<td>Developer</td>
+								<td>New York</td>
+								<td>61</td>
+								<td>2013/08/11</td>
+								<td>$98,540</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Finn Camacho</td>
+								<td>Support Engineer</td>
+								<td>San Francisco</td>
+								<td>47</td>
+								<td>2009/07/07</td>
+								<td>$87,500</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Serge Baldwin</td>
+								<td>Data Coordinator</td>
+								<td>Singapore</td>
+								<td>64</td>
+								<td>2012/04/09</td>
+								<td>$138,575</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Zenaida Frank</td>
+								<td>Software Engineer</td>
+								<td>New York</td>
+								<td>63</td>
+								<td>2010/01/04</td>
+								<td>$125,250</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Zorita Serrano</td>
+								<td>Software Engineer</td>
+								<td>San Francisco</td>
+								<td>56</td>
+								<td>2012/06/01</td>
+								<td>$115,000</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Jennifer Acosta</td>
+								<td>Junior Javascript Developer</td>
+								<td>Edinburgh</td>
+								<td>43</td>
+								<td>2013/02/01</td>
+								<td>$75,650</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Cara Stevens</td>
+								<td>Sales Assistant</td>
+								<td>New York</td>
+								<td>46</td>
+								<td>2011/12/06</td>
+								<td>$145,600</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Hermione Butler</td>
+								<td>Regional Director</td>
+								<td>London</td>
+								<td>47</td>
+								<td>2011/03/21</td>
+								<td>$356,250</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Lael Greer</td>
+								<td>Systems Administrator</td>
+								<td>London</td>
+								<td>21</td>
+								<td>2009/02/27</td>
+								<td>$103,500</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/55.jpg" alt=""></div>
+								</td>
+								<td>Jonas Alexander</td>
+								<td>Developer</td>
+								<td>San Francisco</td>
+								<td>30</td>
+								<td>2010/07/14</td>
+								<td>$86,500</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/65.jpg" alt=""></div>
+								</td>
+								<td>Shad Decker</td>
+								<td>Regional Director</td>
+								<td>Edinburgh</td>
+								<td>51</td>
+								<td>2008/11/13</td>
+								<td>$183,000</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Michael Bruce</td>
+								<td>Javascript Developer</td>
+								<td>Singapore</td>
+								<td>29</td>
+								<td>2011/06/27</td>
+								<td>$183,000</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="hbox-column photo"><img
+											src="http://randomuser.me/api/portraits/men/95.jpg" alt=""></div>
+								</td>
+								<td>Donna Snider</td>
+								<td>Customer Support</td>
+								<td>New York</td>
+								<td>27</td>
+								<td>2011/01/25</td>
+								<td>$112,000</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</section>
+
+		<footer>
+			<!-- Pied-de-page de la page -->
+		</footer>
+	</div>
+
+</body>
+
+</html>
