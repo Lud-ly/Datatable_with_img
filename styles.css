@@ -1,3 +1,6 @@
+body{
+ 
+}
 .col-sm-10{
   margin-top: 5em!important;
 }
@@ -14,6 +17,7 @@
 }
 table.dataTable {
   margin-bottom: 2em;
+  opacity: 0.9;
 }
 .table {
   background-color: #fff;
@@ -143,7 +147,7 @@ select.nav {
 }
 .nav a {
   text-decoration: none;
-  color: #000;
+  color: #ddd;
   font-weight: bold;
   font-size: 17px;
   padding: 10px;

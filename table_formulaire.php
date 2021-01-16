@@ -1,3 +1,43 @@
+<?php
+	$servername = 'localhost';
+	$username = 'root';
+	$password = '';
+	
+	//On essaie de se connecter
+	try{
+		$conn = new PDO("mysql:host=$servername;dbname=mydatabase", $username, $password);
+		//On définit le mode d'erreur de PDO sur Exception
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		echo 'Connexion BDD réussie';
+	}
+	
+	/*On capture les exceptions si une exception est lancée et on affiche
+		*les informations relatives à celle-ci*/
+	catch(PDOException $e){
+		echo "Erreur : " . $e->getMessage();
+	}
+	
+	//On ferme la connexion
+	$conn = null;
+?>
+<?php
+	$servername = 'localhost';
+    $username = 'root';
+    $password = '';
+
+	//Ouverture d'une connexion à la BDD
+	$conn = new PDO("mysql:host=$servername;dbname=mydatabase", $username, $password);
+
+	$pdoStat = $conn-> prepare('SELECT * FROM items');
+
+	//Exècution de la requete
+	$executeIsOk = $pdoStat-> execute();
+
+	//Récupération des résultats
+
+	$cars = $pdoStat->fetchAll();
+?>
+
 <!DOCTYPE HTML>
 <html>
 
@@ -24,7 +64,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"></script>
 </head>
 
-<body>
+<body style="background:url(images/parking.jpg)no-repeat;background-size:cover">
 
 	<div id="page" class="container">
 		<header>
@@ -38,12 +78,12 @@
 		<aside>
 			<!-- Les à-cotés de la page -->
 		</aside>
-
+		
 		<!-- Contenu textuel de la page -->
 		<section>
 			<div class="row">
 				<div class="col-sm-12 text-center">
-					<button id="btToggleDisplay" class="btn btn-info">Toggle table and card view</button>
+					<button id="btToggleDisplay" class="btn btn-default">Toggle table and card view</button>
 				</div>
 			</div>
 			<div class="row">
@@ -80,22 +120,26 @@
 							</tr>
 						</tfoot>
 						<tbody>
+							<?php
+							foreach ($cars as $car):?>
 							<tr>
 								<td>
 									<div class="hbox-column photo"><img
-											src="http://randomuser.me/api/portraits/men/5.jpg" alt=""></div>
+											src=images/<?= $car['image']?> alt="cars_img"></div>
 								</td>
-								<td>Константин Ивановский</td>
-								<td>System Architect</td>
-								<td>Edinburgh</td>
-								<td>61</td>
-								<td>2011/04/25</td>
-								<td>$320,800</td>
+								<td><?= $car['name']?></td>
+								<td><?= $car['description']?></td>
+								<td><?= $car['name']?></td>
+								<td><?= $car['category']?></td>
+								<td><?= $car['price']?></td>
+								<td>$170,750</td>
 							</tr>
+							<?php endforeach; ?>
+							
 							<tr>
 								<td>
 									<div class="hbox-column photo"><img
-											src="http://randomuser.me/api/portraits/men/45.jpg" alt=""></div>
+											src="http://randomuser.me/api/portraits/women/45.jpg" alt=""></div>
 								</td>
 								<td>Garrett Winters</td>
 								<td>Accountant</td>
