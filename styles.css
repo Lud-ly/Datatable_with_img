@@ -1,5 +1,22 @@
 body{
- 
+ color: whitesmoke!important;
+}
+form{
+  text-align: center;
+  padding: 15px;
+  margin-top: 70px!important;
+}
+button{
+ width: 50%;
+ margin:0 auto!important;
+  padding: 10px;
+  border-radius: 5px!important;
+ display: block;
+ margin-left: auto;
+ margin-right: auto;
+}
+button:hover{
+  background-color: rgb(202, 200, 200)!important;
 }
 .col-sm-10{
   margin-top: 5em!important;
@@ -14,7 +31,10 @@ body{
   font-size: 0.7em;
   text-transform: uppercase;
   margin-bottom: 2em;
+  color: whitesmoke!important;
+  padding: 10px;
 }
+
 table.dataTable {
   margin-bottom: 2em;
   opacity: 0.9;
@@ -25,6 +45,7 @@ table.dataTable {
 .table thead, .table tfoot {
   font-size: 0.7em;
   text-transform: uppercase;
+  height: 120px;
 }
 .table tbody label {
   display: none;
@@ -35,13 +56,16 @@ table.dataTable {
   padding: 1em 8px;
 }
 .table .photo {
-  width: 22px;
+  width: 30px;
   margin: 0 auto;
 }
 .table .photo img {
   border-radius: 50%;
   width: 100%;
   height: auto;
+}
+.table .photo img:hover {
+  border-radius: 5%;
 }
 table.cards {
   background-color: transparent;
@@ -50,7 +74,7 @@ table.cards {
   display: none;
 }
 .cards tbody .photo {
-  width: 100px;
+  width: 150px;
   border-radius: 0;
 }
 .cards tbody tr {
@@ -126,7 +150,7 @@ table.cards {
   top: -5px;
   left: -3px;
   float: left;
-  color: #808080;
+  color: whitesmoke;
 }
 .cards tbody td:nth-child(1) {
   text-align: center;
@@ -144,13 +168,14 @@ select.nav {
  align-items: center!important;
  justify-content: left!important;
  text-align: center;
+ margin-top: 100px;
 }
 .nav a {
   text-decoration: none;
   color: #ddd;
   font-weight: bold;
-  font-size: 17px;
-  padding: 10px;
+  font-size: 15px;
+  padding: 8px;
   cursor: pointer;
 }
 .nav a:hover{

@@ -9,11 +9,41 @@ $(document).ready(function () {
     //Datatable
     var tableDT = $('#example').DataTable({
         dom: 'lfrtip',
+        responsive:true,
         //sDom: '', // Hiding the datatables ui
         //bLengthChange: false,
-        ordering: true,
+        //ordering: true,
+        columns: [
+            {
+                "orderable": false
+            },
+            {
+                "orderable": true
+            },
+            {
+                "orderable": true
+            },
+            {
+                "orderable": true
+            },
+            {
+                "orderable": true
+            },
+            {
+                "orderable": true
+            },
+            {
+                "orderable": true
+            },
+            {
+                "orderable": false
+            },
+            {
+                "orderable": false
+            }
+        ],
         oLanguage: {
-            sUrl: "http://cdn.datatables.net/plug-ins/1.10.15/i18n/French.json"
+            sUrl: "http://cdn.datatables.net/plug-ins/1.10.15/i18n/French.json",
         },
         initComplete: initFilter
     });
@@ -46,13 +76,13 @@ $(document).ready(function () {
         var list = []; // set null   
         // push data
         Object.keys(list2).forEach(function (key) {
-            list.push({ city: key, count: list2[key] });
+            list.push({ marque: key, count: list2[key] });
         });
         // sort data
         list.sort(function (a, b) { return (b.count > a.count) ? 1 : ((a.count > b.count) ? -1 : 0); });
         // build <select>
         $.each(list, function (key, value) {
-            var $value = value.city, $text = value.city + ' (' + value.count + ')';
+            var $value = value.marque, $text = value.marque + ' (' + value.count + ')';
             tags.append($("<option></option>").attr("value", $value).text($text));
         });
         // change <select>
@@ -64,7 +94,7 @@ $(document).ready(function () {
         });
         // build <li>
         $.each(list, function (key, value) {
-            var $value = value.city, $text = value.city + ' (' + value.count + ')';
+            var $value = value.marque, $text = value.marque + ' (' + value.count + ')';
             tags2.append(
                 $("<li><a href='#' data-value='" + $value + "'>" + $text + "</a></li>")
             );
@@ -83,4 +113,10 @@ $(document).ready(function () {
         })
 
     } //initTag
+$('form').hide();
+
+
 });
+function show_form(){
+    $('form').fadeToggle();
+}
