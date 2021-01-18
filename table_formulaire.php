@@ -15,12 +15,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- main css and js -->
 
-	<script type="text/javascript" src="jquery_3_5_1.js"></script>
+	<script type="text/javascript" src="Js/jquery_3_5_1.js"></script>
 	<link rel="stylesheet" type="text/css" href="datatables.min.css">
 	<!-- main css and js -->
-	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link rel="stylesheet" type="text/css" href="style/styles.css">
 	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
-	<script type="text/javascript" charset="utf8" src="datatables.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="Js/datatables.min.js"></script>
 	<script type="text/javascript" charset="utf8" src="Js/my_datatable.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
