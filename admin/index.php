@@ -1,5 +1,4 @@
 <?php
-	require 'connBdd.php';
 	require 'lister.php';
 ?> 
 <!DOCTYPE HTML>
@@ -13,22 +12,16 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<!-- Tablettes 'n' Mobiles -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- main css and js -->
-
-	<script type="text/javascript" src="Js/jquery_3_5_1.js"></script>
-	<link rel="stylesheet" type="text/css" href="datatables.min.css">
-	<!-- main css and js -->
-	<link rel="stylesheet" type="text/css" href="style/styles.css">
+	<link rel="stylesheet" type="text/css" href="../style/datatables.min.css">
+	<!-- main css -->
+	<link rel="stylesheet" type="text/css" href="../style/styles.css">
 	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
-	<script type="text/javascript" charset="utf8" src="Js/datatables.min.js"></script>
-	<script type="text/javascript" charset="utf8" src="Js/my_datatable.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../Js/jquery_3_5_1.js"></script>
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 
-<body style="background:url(images/pilepneus.png)no-repeat;background-size:cover,cover">
+<body style="background:url(../images/bg.png);background-position:center;max-width:100%;">
 
 	<div id="page" class="container" >
 		<header>
@@ -55,8 +48,12 @@
 					<select class="nav" id="tags">
 						<option value="">All</option>
 					</select>
+					<a href="insert.php" class="ajout"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+						<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+						<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+						</svg> Ajouter</a>
 					<ul class="nav" id="tags2">
-						<li><a href="#" data-value="">ALL</a></li>
+						<li><a href="#" data-value="" class="all">ALL</a></li>
 					</ul>
 				</div>
 				<div class="col-sm-10">
@@ -69,7 +66,7 @@
 								<th>Marque</th>
 								<th>0-100km/h</th>
 								<th>Couple</th>
-								<th>Mise En Circulation</th>
+								<th>Année</th>
 								<th>Edit</th>
 								<th>Supp</th>
 							</tr>
@@ -82,7 +79,7 @@
 								<th>Marque</th>
 								<th>De-0-100km/h<</th>
 								<th>Couple</th>
-								<th>Mise En Circulation</th>
+								<th>Année</th>
 								<th>Edit</th>
 								<th>Supp</th>
 							</tr>
@@ -93,7 +90,7 @@
 							<tr>
 								<td>
 									<div class="hbox-column photo">
-										<img src=images/<?= $car['image']?> alt="cars_img"></div>
+										<a href="view.php?id=1"><img src=../images/<?= $car['image']?> alt="cars_img"></a></div>
 								</td>	
 								<td><?= $car['modele']?></td>
 								<td><?= $car['moteur']?></td>
@@ -101,8 +98,8 @@
 								<td><?= $car['de_0_100km_h']?></td>
 								<td><?= $car['couple']?></td>	
 								<td><?= $car['miseEnCirculation']?></td>
-								<td><img src="images/edit_pencil.png"/></td>
-								<td><img src="images/trash.png"/></td>
+								<td><a href ="update.php?id=1"><img src="../images/edit_pencil.png"/></a></td>
+								<td><a href="delete.php?id=1"><img src="../images/trash.png"/></a></td>
 							</tr>
 							<?php endforeach; ?>
 							
@@ -112,48 +109,19 @@
 			</div>
 
 		</section>
-		<section>
-			<button class="button" onclick="show_form()">Ajouter un Véhicule</button>
-
-			<form action="insertion.php" method="post">
-				
-				<p>
-					<label for="marque">Marque</label>
-					<input id="marque" type="text" name="brand" placeholder="Ex Bmw">
-				</p>
-				<p>
-					<label for="modele">Modèle</label>
-					<input id="modele" type="text" name="model" placeholder="Ex M3">
-				</p>
-				<p>
-					<label for="moteur">Moteur</label>
-					<input id="moteur" type="text" name="engine" placeholder="Ex 3.0L V6 24s">
-				</p>
-				<p>
-					<label for="couple">Couple</label>
-					<input id="couple" type="text" name="torque" placeholder="Ex 530Nm">
-				</p>
-				<p>
-					<label for="de_0_100km-h">de-0-100kmh</label>
-					<input id="de_0_100km_h" type="text" name="acceleration" placeholder="Ex 6.9 secondes">
-				</p>
-				<p>
-					<label for="miseEnCirculation">Mise en circulation</label>
-					<input id="miseEnCirculation" type="text" name="year" placeholder="Ex 1998-07-12">
-				</p>
-				<p>
-					<label for="image">Photo</label>
-					<input id="image" type="text" name="photo" placeholder="Ex M3.png">
-				</p>
-				<p><input type="submit" value="Enregistrer"></p>
-			</form>
-		
-		</section>
 		<footer>
 			<!-- Pied-de-page de la page -->
 		</footer>
 	</div>
-
+		<!-- CREATION MODAL ENREGISTREMENT EN COURS -->
+		<div class="modalChanged" id="divModalSaving">
+	</div>
+	<!-- main js -->
+	<script type="text/javascript" charset="utf8" src="../Js/datatables.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="../Js/my_datatable.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>

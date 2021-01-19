@@ -12,7 +12,7 @@ $(document).ready(function () {
         responsive:true,
         //sDom: '', // Hiding the datatables ui
         //bLengthChange: false,
-        //ordering: true,
+        ordering: true,
         columns: [
             {
                 "orderable": false
@@ -80,19 +80,19 @@ $(document).ready(function () {
         });
         // sort data
         list.sort(function (a, b) { return (b.count > a.count) ? 1 : ((a.count > b.count) ? -1 : 0); });
-        // build <select>
+        // build le <select>
         $.each(list, function (key, value) {
             var $value = value.marque, $text = value.marque + ' (' + value.count + ')';
             tags.append($("<option></option>").attr("value", $value).text($text));
         });
-        // change <select>
+        // change le <select>
         tags.on('change', function () {
             var val = $.fn.dataTable.util.escapeRegex($(this).val());
             tableTag
                 .search(val ? '^' + val + '$' : '', true, false)
                 .draw();
         });
-        // build <li>
+        // build <li> dans la nav
         $.each(list, function (key, value) {
             var $value = value.marque, $text = value.marque + ' (' + value.count + ')';
             tags2.append(
@@ -106,17 +106,13 @@ $(document).ready(function () {
                 .search(val ? '^' + val + '$' : '', true, false)
                 .draw();
         });
-
         $('#btToggleDisplay').on('click', function () {
-            $("#example").toggleClass('cards')
+            $("#example").toggleClass('cards');
             //$("#example thead, #example tfoot").toggle()
         })
-
+  
     } //initTag
-$('form').hide();
+  
 
 
 });
-function show_form(){
-    $('form').fadeToggle();
-}
