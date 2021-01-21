@@ -18,10 +18,10 @@
 	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script type="text/javascript" src="../Js/jquery_3_5_1.js"></script>
-	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
 </head>
 
-<body style="background:url(../images/bg.png);background-position:center;max-width:100%;">
+<body class="myTable">
 
 	<div id="page" class="container" >
 		<header>
@@ -40,7 +40,7 @@
 		<section>
 			<div class="row">
 				<div class="col-sm-12 text-center">
-					<button id="btToggleDisplay"class="button">Toggle table and card view</button>
+					<button id="btToggleDisplay"class="button">Toggle Datatable Cars</button>
 				</div>
 			</div>
 			<div class="row">
@@ -60,7 +60,7 @@
 					<table id="example" class="table display cards" cellspacing="0" width="100%">
 						<thead>
 							<tr>
-								<th class="th_photo">Photo</th>
+								<th class="th_photo">Voir</th>
 								<th class="th_name">Modèle</th>
 								<th>Moteur</th>
 								<th>Marque</th>
@@ -71,26 +71,13 @@
 								<th>Supp</th>
 							</tr>
 						</thead>
-						<tfoot>
-							<tr>
-								<th>Photo</th>
-								<th>Modèle</th>
-								<th>Moteur</th>
-								<th>Marque</th>
-								<th>De-0-100km/h<</th>
-								<th>Couple</th>
-								<th>Année</th>
-								<th>Edit</th>
-								<th>Supp</th>
-							</tr>
-						</tfoot>
 						<tbody>
 							<?php
 							foreach ($aOfcars as $car):?>
 							<tr>
 								<td>
 									<div class="hbox-column photo">
-										<a href="view.php?id=1"><img src=../images/<?= $car['image']?> alt="cars_img"></a></div>
+										<a href="view.php?id=<?= $car['id'] ?>"><img src=../images/<?= $car['image']?> alt="cars_img"title="Voir"></a></div>
 								</td>	
 								<td><?= $car['modele']?></td>
 								<td><?= $car['moteur']?></td>
@@ -98,8 +85,8 @@
 								<td><?= $car['de_0_100km_h']?></td>
 								<td><?= $car['couple']?></td>	
 								<td><?= $car['miseEnCirculation']?></td>
-								<td><a href ="update.php?id=1"><img src="../images/edit_pencil.png"/></a></td>
-								<td><a href="delete.php?id=1"><img src="../images/trash.png"/></a></td>
+								<td><a href ="update.php?id=<?= $car['id'] ?>"><img src="../images/edit_pencil.png"/></a></td>
+								<td><a href="delete.php?id=<?= $car['id'] ?>"><img src="../images/trash.png"/></a></td>
 							</tr>
 							<?php endforeach; ?>
 							

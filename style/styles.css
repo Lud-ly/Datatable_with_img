@@ -1,5 +1,16 @@
 body{
- color: whitesmoke!important;
+ color: whitesmoke;
+ background-color: #1d1d1d!important;
+}
+.admin{
+  text-align: center;
+  padding: 50px;
+  font-size: 25px;
+}
+.home_photos img{
+  width: 75px;
+  height: 45px;
+  float: left;
 }
 /* Style modal saving in progress */
 #divModalSaving {
@@ -20,19 +31,22 @@ body{
 	z-index: 1000;
 }
 button{
- width: 50%;
+ width: 80%;
+ font-size: 25px!important;
  margin:0 auto!important;
  padding: 10px;
+ margin: 30px!important;
  border-radius: 5px!important;
- display: block;
- margin-left: auto;
- margin-right: auto;
- color: #000;
+ background-color: transparent;
+ color: whitesmoke;
+ text-shadow: 1px 1px #000;
+ border :1px solid #658b72;
 }
 button:hover{
   text-decoration: none;
   background-color:transparent!important;
-  color: #fff;
+  color: #121212;
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
 }
 .butAdmin{
   border: none;
@@ -60,14 +74,14 @@ button:hover{
   color: #fff !important;
   text-transform: uppercase;
   text-decoration: none;
-  background: #14c04d;
+  background: #658b72;
   margin: 30px 35px;
   display: block;
   padding: 10px;
   font-size: 12px;
   border-radius: 5px;
   display: inline-block;
-  border: none;
+  border :1px solid whitesmoke;
   transition: all 0.4s ease 0s;
   }
   .ajout:hover {
@@ -78,8 +92,42 @@ button:hover{
     text-decoration: none;
     background: transparent;
     }
+.form-actions{
+  border: none!important;
+  background: none!important;
+  padding: 0!important;
+}
 .col-sm-10{
   margin-top: 5em!important;
+}
+.thumbnail{
+  border: none!important;
+  border-radius: 5px;
+}
+.thumbnail>img{
+  margin: 37px;
+}
+.form-group label{
+  color: #000;
+}
+.form-group,.form-group input,.form-group select,.form-group label{
+  margin-bottom: 0px!important;
+  height: 50px;
+  cursor: pointer;
+}
+input[type="file"]{
+  padding: 5px;
+  border: 1px solid #121212;
+  border-radius: 5px;
+  margin-top: 20px!important;
+  height: 50px!important;
+  background-color: #658b72;
+}
+.help-inline{
+  color:rgb(202, 53, 53)!important;
+}
+header img{
+  background-position: center;
 }
 /*----------------------------------------------------Button & input Form---------------------------------------------------*/
 
@@ -92,7 +140,7 @@ button:hover{
   text-transform: uppercase;
   margin-bottom: 2em;
   color: whitesmoke!important;
-  padding: 10px;
+  padding: 10px!important;
 }
 
 table.dataTable {
@@ -102,7 +150,7 @@ table.dataTable {
 .table {
   background-color: #fff;
 }
-.table thead, .table tfoot {
+.table thead{
   font-size: 0.7em;
   text-transform: uppercase;
   height: 100px;
@@ -113,19 +161,24 @@ table.dataTable {
   width: 50px;
 }
 .table > tbody > tr > td {
-  padding: 1em 8px;
+  padding: 0.8em 8px;
 }
 .table .photo {
-  width: 80px;
+  width: 40px;
   margin: 0 auto;
 }
 .table .photo img {
   border-radius: 50%;
   width: 100%;
   height: auto;
+  transition: transform .2s;
 }
 .table .photo img:hover {
   border-radius: 5%;
+  -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  transform: scale(1.5); 
+  opacity: 1;
 }
 table.cards {
   background-color: transparent;
@@ -134,7 +187,8 @@ table.cards {
   display: none;
 }
 .cards tbody .photo {
-  width: 150px;
+  min-width: 150px;
+  min-height: 100px;
   border-radius: 0;
 }
 .cards tbody tr {
@@ -143,8 +197,7 @@ table.cards {
   height: 280px;
   position: relative;
   overflow: hidden;
-  margin-right: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 1px;
   background-color: #ffffff !important;
   border: 2px solid #626262;
   border-radius: 2px;
@@ -163,6 +216,7 @@ table.cards {
 }
 .cards tbody tr td:nth-child(2) {
   display: block;
+  color: #658b72;
   position: relative;
   font-size: 100%;
   height: 25px;
@@ -178,7 +232,6 @@ table.cards {
   width: 5px;
   height: 100%;
   background: #fff;
-  box-shadow: 0px 0px 20px 10px #fff;
 }
 .cards tbody tr td:nth-child(3) {
   font-size: 80%;
@@ -195,14 +248,12 @@ table.cards {
   bottom: 0;
   left: 0;
   right: 0;
+
 }
 .cards tbody td {
   display: block;
   overflow: hidden;
   text-align: left;
-}
-.cards .glyphicon {
-  font-size: 75px;
 }
 .cards tbody label {
   display: inline;
@@ -230,14 +281,28 @@ select.nav {
  text-align: center;
 }
 .nav a {
+  text-shadow: 1px 1px black;
   text-decoration: none;
   color: #ddd;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 20px;
   padding: 8px;
   cursor: pointer;
 }
-
+.nav a:hover{
+color: #658b72;
+}
+.parking,.ajoutParking{
+  background:url(../images/parking.jpg)no-repeat;
+  background-size:cover,cover;
+}
+.admin h1{
+  text-shadow: 1px 1px rgb(170, 169, 169);
+}
+.myTable{
+  background:url(../images/plymouth.jpg)no-repeat;
+  /* background-size:cover,cover; */
+}
 /* Portrait tablets and small desktops */
 @media (max-width: 1200px) {
   .nav li {

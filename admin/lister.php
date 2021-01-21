@@ -1,16 +1,17 @@
 <?php
+
 	require 'database.php';
 	$db = Database::connect();
 
-$pdoStat = $db-> prepare('SELECT * FROM items');
+		$pdoStat = $db-> prepare('SELECT * FROM items ORDER BY items.modele DESC');
 
-//Exècution de la requete
-$executeIsOk = $pdoStat-> execute();
+		//Exècution de la requete
+		$executeIsOk = $pdoStat-> execute();
 
-//Récupération des résultats
+		//Récupération des résultats
 
-$aOfcars = $pdoStat->fetchAll();
+		$aOfcars = $pdoStat->fetchAll();
 
-
+	Database::disconnect();
 
 ?>

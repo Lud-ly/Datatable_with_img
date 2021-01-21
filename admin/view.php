@@ -7,7 +7,7 @@ if(!empty($_GET['id'])){
 
 $db = Database::connect();
 
-$statement = $db->prepare('SELECT items.id, items.marque, items.modele, items.moteur, items.couple, items.de_0_100km_h, items.miseEnCirculation, categories.name AS category FROM items LEFT JOIN categories ON items.category = categories.id WHERE items.id = ?');
+$statement = $db->prepare('SELECT items.id, items.marque, items.modele, items.moteur, items.couple, items.de_0_100km_h, items.miseEnCirculation, items.prix, items.image, categories.name AS category FROM items LEFT JOIN categories ON items.category = categories.id  WHERE items.id = ?');
 $statement->execute(array($id));
 $item = $statement->fetch();
 Database::disconnect();
@@ -38,51 +38,48 @@ function checkInput($data){
 	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script type="text/javascript" src="../Js/jquery_3_5_1.js"></script>
-	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
 </head>
 
-<body style="background:url(../images/parking.jpg)no-repeat;background-size:cover,cover">
-
-<h1 class="text-logo"><span class="glyphicon glyphicon-leaf"></span> Monster <span class="g">G</span>arage  <span class="glyphicon glyphicon-leaf"></span></h1>
-            <div class="container admin">
+<body class="parking">
+        <div class="container admin">
+        <a class="ajout" href="index.php"><span > Retour</span></a>
+            <a class="ajout" href="update.php"><span > Modifier</span></a>
+                        <br/>
               <div class="row">
-                  <div class="col-sm-6">
-                       <h1><strong>Voir un item </strong></h1>
-                      <br>
-                       <a class="btn btn-default" href="index.php"><span class="glyphicon glyphicon-arrow-left"> Retour</span></a>
-                      <br/>
-                      <form>
-                        <div class="form-group">
-                            <label>Nom : </label><?php echo '  ' . $item['marque']; ?>
-                        </div>
-                           <div class="form-group">
-                            <label>Description : </label><?php echo '  ' . $item['modele']; ?>
-                        </div>
-                           <div class="form-group">
-                            <label>Prix : </label><?php echo ' ' . number_format((float)$item['price'],2,'.','') . ' €'; ?>
-                        </div>
-                           <div class="form-group">
-                            <label>Catégorie : </label><?php echo '  ' . $item['category']; ?>
-                        </div>
-                           <div class="form-group">
-                            <label>Image : </label><?php echo '  ' . $item['couple']; ?>
-                        </div>
-                      </form>
-                      <br>
-                       <div class="form-actions">
-                       </div>
+                  <div class="col-sm-5">
+                        <h1><strong><?= $item['category'] ?></strong></h1>
+                        <br>
+                        <form>
+                            <div class="form-group">
+                                <label>Modele : </label><?= $item['modele']; ?>
+                            </div>
+                            <div class="form-group">
+                                <label>Moteur : </label><?= $item['moteur']; ?>
+                            </div>
+                            <div class="form-group">
+                                <label>Couple : </label><?= $item['couple'];?>
+                            </div>
+                            <div class="form-group"> 
+                                <label>De 0 à 100 KM/H : </label><?= $item['de_0_100km_h']; ?>
+                            </div> 
+                            <div class="form-group"> 
+                                <label>Prix : </label><?= number_format($item['prix'], 2, '.','') . ' $ ' ; ?>
+                            </div> 
+                            <div class="form-group">
+                                <label>Mise en circulation : </label><?= $item['miseEnCirculation'];?>
+                            </div>
+                            <div class="form-group">
+                                <label>Nom de l'image : </label><?= $item['image']; ?>
+                            </div>
+                        </form>
+                        <br>
                   </div>
                   
                   
-            <div class="col-sm-6 site">
+            <div class="col-sm-7">
                     <div class="thumbnail">
-                        <img src="<?php echo '../images/' .  $item['image'] ; ?>" alt="...">
-                          <div class="price"><?php echo number_format((float)$item['price'],2,'.','') . ' €'; ?></div>
-                            <div class="caption">
-                                    <h4><?php echo $item['name']; ?></h4>
-                                    <p><?php echo $item['description']; ?></p>
-                                    <a href="http://www.lacentrale.fr" class="btn btn-order" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Chercher</a>
-                            </div>
+                        <img src="<?= '../images/' .  $item['image'] ; ?>" alt="...">
                         </div>
                     </div>
                 </div>
