@@ -59,7 +59,7 @@
 
 					foreach ($aOfcars as $car):?>
 					    <div class="home_photos">
-							<a href="admin/update.php?id=<?= $car['id'] ?>"><img src=./images/<?= $car['image']?> alt="cars_img"></a>
+							<a href="admin/login.php"><img src=./images/<?= $car['image']?> alt="cars_img"></a>
 							<h1><?= $car['modele'] ?></h1>
 					    </div>
 					<?php endforeach; ?>

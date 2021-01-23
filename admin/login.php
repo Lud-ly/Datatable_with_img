@@ -45,7 +45,7 @@ function checkInput($data){
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="../style/datatables.min.css">
 	<!-- main css -->
-	<link rel="stylesheet" type="text/css" href="../style/styles.css">
+	<link rel="stylesheet" type="text/css" href="../style/login.css">
 	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script type="text/javascript" src="../Js/jquery_3_5_1.js"></script>
@@ -57,6 +57,23 @@ function checkInput($data){
     <body class="c_hello">
         <div class="container admin">
             <div class="row">
+            <div class="login-page">
+      <div class="form">
+        <div class="login">
+          <div class="login-header">
+                 <a class="login-form" href="./index.php"> Retour</a>
+            <h3>LOGIN</h3>
+            <p>Please enter your credentials to login.</p>
+          </div>
+        </div>
+        <form class="login-form">
+          <input type="text" placeholder="username"/>
+          <input type="password" placeholder="password"/>
+          <button>login</button>
+          <p class="message">Not registered? <a href="registration.php">Create an account</a></p>
+        </form>
+      </div>
+    </div>
                 <h1><strong>Login </strong></h1>
                 <br>
                 <a class="button" href="/index.php"> Retour</a>
