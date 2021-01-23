@@ -99,6 +99,7 @@ $(document).ready(function () {
                 $("<li><a href='#' data-value='" + $value + "'>" + $text + "</a></li>")
             );
         });
+        //Onclick Search & find <li>
         tags2.find('a').on('click', function (e) {
             e.preventDefault();
             var val = $.fn.dataTable.util.escapeRegex($(this).attr('data-value'));
@@ -106,6 +107,7 @@ $(document).ready(function () {
                 .search(val ? '^' + val + '$' : '', true, false)
                 .draw();
         });
+        //Table view
         $('#btToggleDisplay').on('click', function () {
             $("#example").toggleClass('cards');
             //$("#example thead, #example tfoot").toggle()
@@ -113,6 +115,17 @@ $(document).ready(function () {
   
     } //initTag
   
-
-
 });
+
+  window.onscroll = function() {myEffect()};
+    
+    var navbar = document.getElementById("navbar");
+    var sticky = navbar.offsetTop;
+    
+    function myEffect() {
+      if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky")
+      } else {
+        navbar.classList.remove("sticky");
+      }
+    }

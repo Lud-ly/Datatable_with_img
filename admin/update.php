@@ -1,10 +1,11 @@
 <?php
-//  session_start();
-//   if(!isset($_SESSION['email'])){
+  session_start();
+   if(!isset($_SESSION['email'])){
     
-//     header("Location: login.php");
-// }
-
+     header("Location: login.php");
+//exit();
+ }
+$sMessage = "";
 require 'database.php';
 
 //GET->Récuperer id Au premier passage
@@ -13,12 +14,14 @@ if (!empty($_GET['id'])){
 } 
 
    
-    $marqueError = $modeleError = $moteurError = $coupleError = $de_0_100km_hError = $miseEnCirculationError = $prixError = $categoryError= $imageError  = $marque = $modele = $moteur = $couple = $de_0_100km_h = $miseEnCirculation = $prix =  $category = $image ="";
+    $marqueError = $modeleError = $chevauxError = $vitesseMaxError = $moteurError = $coupleError = $de_0_100km_hError = $miseEnCirculationError = $prixError = $categoryError= $imageError  = $marque = $modele = $chevaux = $vitesseMax = $moteur = $couple = $de_0_100km_h = $miseEnCirculation = $prix =  $category = $image ="";
     //Si la variable post est pas vide alors nettoyage checkInput et rempli toutes les variables
     if(!empty($_POST)){
       
       $marque           = checkInput($_POST['marque']);//Variables super globale POST
       $modele           = checkInput($_POST['modele']);
+      $chevaux          = checkInput($_POST['chevaux']);
+      $vitesseMax       = checkInput($_POST['vitesseMax']);
       $moteur           = checkInput($_POST['moteur']);
       $couple           = checkInput($_POST['couple']);
       $de_0_100km_h     = checkInput($_POST['de_0_100km_h']);
@@ -38,6 +41,14 @@ if (!empty($_GET['id'])){
           $modeleError = 'Ce champ ne  peut être vide';
           $isSuccess = false;
       }
+      if(empty($chevaux)){
+        $chevauxError = 'Ce champ ne  peut être vide';
+        $isSuccess = false;
+    }
+    if(empty($vitesseMax)){
+        $vitesseMaxError = 'Ce champ ne  peut être vide';
+        $isSuccess = false;
+    }
       if(empty($moteur)){
           $moteurError = 'Ce champ ne  peut être vide';
           $isSuccess = false;
@@ -100,28 +111,32 @@ if (!empty($_GET['id'])){
                 $db = Database::connect();
 
                 if($isImageUpdated){
-                        $statement = $db->prepare("UPDATE items SET (marque = ?,modele = ?,moteur = ?,couple = ?,de_0_100km_h = ?, miseEnCirculation = ?, prix = ?,`image` = ?, category = ?) WHERE id = ?");
-                        $statement->execute(array( $marque,$modele,$moteur,$couple,$de_0_100km_h,$miseEnCirculation,$prix,$image,$category,$id));
+                        $statement = $db->prepare("UPDATE items SET marque = ?,modele = ?,chevaux = ?,vitesseMax = ?,moteur = ?,couple = ?,de_0_100km_h = ?, miseEnCirculation = ?, prix = ?,`image` = ?, category = ? WHERE id = ?");
+                        $statement->execute(array( $marque,$modele,$chevaux,$vitesseMax,$moteur,$couple,$de_0_100km_h,$miseEnCirculation,$prix,$image,$category,$id));
+                      
                 }
                 else{
-                    $statement = $db->prepare("UPDATE items SET (marque = ?,modele = ?,moteur = ?,couple = ?,de_0_100km_h = ?, miseEnCirculation = ?, prix = ?,category = ?) WHERE id = ?");
-                    $statement->execute(array( $marque,$modele,$moteur,$couple,$de_0_100km_h,$miseEnCirculation,$prix,$category,$id));
+                    $statement = $db->prepare("UPDATE items SET marque = ?,modele = ?,chevaux = ?,vitesseMax = ?,moteur = ?,couple = ?,de_0_100km_h = ?, miseEnCirculation = ?, prix = ?,category = ? WHERE id = ?");
+                    $statement->execute(array( $marque,$modele,$chevaux,$vitesseMax,$moteur,$couple,$de_0_100km_h,$miseEnCirculation,$prix,$category,$id));
+                 
+                    
                 }
             
             Database::disconnect();
+            if (count($_POST)>0) $sMessage = "La voiture a bien été Modifiée !"; 
             header("Location: index.php");
         }
         //Sinon si image a été updaté et que upload à echoué =false
-        else if($isImageUpdated && !$isUploadSuccess){
+         else if($isImageUpdated && !$isUploadSuccess){
 
-            $db = Database::connect();
-            $statement = $db->prepare("SELECT `image` FROM items WHERE id = ?");
-            $statement->execute(array($id));
-            $item = $statement->fecth();
-            //On remet l'image dans la var image
-            $image = $item['image'];
-            Database::disconnect();
-        }
+             $db = Database::connect();
+             $statement = $db->prepare("SELECT `image` FROM items WHERE id = ?");
+             $statement->execute(array($id));
+             $item = $statement->fecth();
+             //On remet l'image dans la var image
+             $image = $item['image'];
+             Database::disconnect();
+         }
     }
 
 //1er passage avant de cliquer sur modifier
@@ -133,6 +148,8 @@ else{
     $item = $statement->fetch();
     $marque = $item['marque'];
     $modele = $item['modele'];
+    $chevaux = $item['chevaux'];
+    $vitesseMax = $item['vitesseMax'];
     $moteur = $item['moteur'];
     $couple = $item['couple'];
     $de_0_100km_h = $item['de_0_100km_h'];
@@ -180,7 +197,7 @@ function checkInput($data){
     <body class="ajoutParking">
             <div class="container admin">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <form class="form" role="form" action="<?= 'update.php?id=' . $id; ?>" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="marque">Marque : </label>
@@ -191,6 +208,16 @@ function checkInput($data){
                                 <label for="modele">Modele : </label>
                                 <input type="text" id="modele" name="modele" placeholder="M3" value="<?= $modele; ?>">
                                 <span class="help-inline"><?= $modeleError; ?></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="chevaux">Chevaux : </label>
+                                <input type="text" id="chevaux" name="chevaux" placeholder="300" value="<?= $chevaux; ?>">
+                                <span class="help-inline"><?= $chevauxError; ?></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="vitesseMax">Vitesse Max : </label>
+                                <input type="text" id="vitesseMax" name="vitesseMax" placeholder="220" value="<?= $vitesseMax; ?>">
+                                <span class="help-inline"><?= $vitesseMaxError; ?></span>
                             </div>
                             <div class="form-group">
                                 <label for="moteur">Moteur : </label>
@@ -218,8 +245,10 @@ function checkInput($data){
                                 <span class="help-inline"><?= $prixError; ?></span>
                             </div>
                             <div class="form-group">
-                                <label>Image</label>
-                                <p><?= $image ?></p>
+                                <label for="nomImage">Image</label>
+                                <input  type="text"name="nomImage" value=<?= $image ?>>
+                            </div>
+                            <div class="form-group">
                                 <label for="category">Catégorie : </label>
                                 <select  id="category" name="category">
                                     <?php
@@ -230,13 +259,11 @@ function checkInput($data){
                                         else
                                             echo '<option  value="' . $row['id'] .'">' . $row['name'] . '</option>'; 
                                     }
-
                                     Database::disconnect();
                                     ?>
                                 </select>
                                 <span class="help-inline"><?=$categoryError; ?></span>
-                                
-                            </div>
+                            </div> 
                             <div class="form-group">
                                 <label for="image">Sélectionner une image : </label>
                                 <input type="file" id="image" name="image">
@@ -248,9 +275,9 @@ function checkInput($data){
                             </div>
                         </form>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-7">
                         <a class="ajout" href="index.php">Retour</a>
-                        <h1><strong>Modifier une Voiture </strong></h1> 
+                        <h1><strong>Modifier la Voiture </strong></h1> 
                         <img src="<?= '../images/' .  $item['image'] ; ?>" alt="...">
                     </div>
                 </div>

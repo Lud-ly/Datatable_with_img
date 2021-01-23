@@ -1,5 +1,12 @@
 <?php
-	require 'lister.php';
+//PHP login System by DEVDREAMS (https://devdreams.fr) 
+ session_start();
+ if(!isset($_SESSION['email'])){
+   
+   header("Location: login.php");
+}
+
+require 'lister.php';
 ?> 
 <!DOCTYPE HTML>
 <html>
@@ -40,11 +47,11 @@
 		<section>
 			<div class="row">
 				<div class="col-sm-12 text-center">
-					<button id="btToggleDisplay"class="button">Toggle Datatable Cars</button>
+					<button id="btToggleDisplay"class="button">Check Datatable & Card Cars</button>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-2">
+				<div class="col-sm-2 mySelect">
 					<select class="nav" id="tags">
 						<option value="">All</option>
 					</select>
@@ -62,11 +69,11 @@
 							<tr>
 								<th class="th_photo">Voir</th>
 								<th class="th_name">Modèle</th>
-								<th>Moteur</th>
+								<th>Chevaux</th>
 								<th>Marque</th>
-								<th>0-100km/h</th>
-								<th>Couple</th>
-								<th>Année</th>
+								<th>Vitesse max</th>
+								<th>Moteur</th>
+								<th>Prix</th>
 								<th>Edit</th>
 								<th>Supp</th>
 							</tr>
@@ -80,13 +87,13 @@
 										<a href="view.php?id=<?= $car['id'] ?>"><img src=../images/<?= $car['image']?> alt="cars_img"title="Voir"></a></div>
 								</td>	
 								<td><?= $car['modele']?></td>
-								<td><?= $car['moteur']?></td>
+								<td><?= $car['chevaux']?> CV</td>
 								<td><?= $car['marque']?></td>
-								<td><?= $car['de_0_100km_h']?></td>
-								<td><?= $car['couple']?></td>	
-								<td><?= $car['miseEnCirculation']?></td>
-								<td><a href ="update.php?id=<?= $car['id'] ?>"><img src="../images/edit_pencil.png"/></a></td>
-								<td><a href="delete.php?id=<?= $car['id'] ?>"><img src="../images/trash.png"/></a></td>
+								<td><?= $car['vitesseMax']?></td>	
+								<td><?= $car['moteur']?></td>	
+								<td><?= $car['prix']?> €</td>
+								<td><a href ="update.php?id=<?= $car['id'] ?>"><img src="../images/edit_pencil.png"width="20" height="20"/></a></td>
+								<td><a href="delete.php?id=<?= $car['id'] ?>"><img src="../images/trash.png"width="20" height="20"/></a></td>
 							</tr>
 							<?php endforeach; ?>
 							

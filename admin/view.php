@@ -7,13 +7,13 @@ if(!empty($_GET['id'])){
 
 $db = Database::connect();
 
-$statement = $db->prepare('SELECT items.id, items.marque, items.modele, items.moteur, items.couple, items.de_0_100km_h, items.miseEnCirculation, items.prix, items.image, categories.name AS category FROM items LEFT JOIN categories ON items.category = categories.id  WHERE items.id = ?');
-$statement->execute(array($id));
-$item = $statement->fetch();
+    $statement = $db->prepare('SELECT items.id, items.marque, items.modele, items.chevaux, items.vitesseMax, items.moteur, items.couple, items.de_0_100km_h, items.miseEnCirculation, items.prix, items.image, categories.name AS category FROM items LEFT JOIN categories ON items.category = categories.id  WHERE items.id = ?');
+    $statement->execute(array($id));
+    $item = $statement->fetch();
 Database::disconnect();
 
 
-//Sécurité input
+//Nettoyage & Sécurité data
 function checkInput($data){
     $data = trim($data);
     $data = stripslashes($data);
@@ -44,7 +44,7 @@ function checkInput($data){
 <body class="parking">
         <div class="container admin">
         <a class="ajout" href="index.php"><span > Retour</span></a>
-            <a class="ajout" href="update.php"><span > Modifier</span></a>
+            <a class="ajout" href="update.php?id=<?= $item['id'] ?>"><span > Modifier</span></a>
                         <br/>
               <div class="row">
                   <div class="col-sm-5">
@@ -53,6 +53,12 @@ function checkInput($data){
                         <form>
                             <div class="form-group">
                                 <label>Modele : </label><?= $item['modele']; ?>
+                            </div>
+                            <div class="form-group">
+                                <label>Chevaux : </label><?= $item['chevaux']; ?>
+                            </div>
+                            <div class="form-group">
+                                <label>Vitesse max : </label><?= $item['vitesseMax'];?> km/h 
                             </div>
                             <div class="form-group">
                                 <label>Moteur : </label><?= $item['moteur']; ?>
@@ -64,14 +70,8 @@ function checkInput($data){
                                 <label>De 0 à 100 KM/H : </label><?= $item['de_0_100km_h']; ?>
                             </div> 
                             <div class="form-group"> 
-                                <label>Prix : </label><?= number_format($item['prix'], 2, '.','') . ' $ ' ; ?>
+                                <label>Prix : </label><?= number_format($item['prix'], 2, '.','') . ' € ' ; ?>
                             </div> 
-                            <div class="form-group">
-                                <label>Mise en circulation : </label><?= $item['miseEnCirculation'];?>
-                            </div>
-                            <div class="form-group">
-                                <label>Nom de l'image : </label><?= $item['image']; ?>
-                            </div>
                         </form>
                         <br>
                   </div>
@@ -81,6 +81,12 @@ function checkInput($data){
                     <div class="thumbnail">
                         <img src="<?= '../images/' .  $item['image'] ; ?>" alt="...">
                         </div>
+                    </div>
+                    <div class="form-group">
+                                <label>Mise en circulation : </label><?= $item['miseEnCirculation'];?>
+                            </div>
+                            <div class="form-group">
+                                <label>Nom de l'image : </label><?= $item['image']; ?>
                     </div>
                 </div>
          </div>

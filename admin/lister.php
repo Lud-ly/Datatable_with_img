@@ -3,7 +3,7 @@
 	require 'database.php';
 	$db = Database::connect();
 
-		$pdoStat = $db-> prepare('SELECT * FROM items ORDER BY items.modele DESC');
+		$pdoStat = $db-> prepare('SELECT * FROM items ');
 
 		//Exècution de la requete
 		$executeIsOk = $pdoStat-> execute();

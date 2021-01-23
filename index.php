@@ -17,27 +17,32 @@
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 
- <body > <!--style="background:url(images/pilepneus.png)no-repeat;background-size:cover,cover" -->
+ <body class="conn">
 
 	<div id="page" class="container">
 		<header>
 			<!-- Entête de la zone considérée -->
 		</header>
-	
-		<nav>
-			<!-- Nav. principale de la page -->
-		</nav>
+		<!-- Nav. principale de la page -->
+		<div class="header">
+			<h1>Monster Garage</h1>
+			<p>Connexion to check cars.</p>
+		</div>
 
+		<div id="navbar">
+		<a class="active" href="javascript:void(0)">Home</a>
+		<a href="javascript:void(0)">S'inscrire</a>
+		<a href="javascript:void(0)">Déconnexion</a>
+		</div>
+		
 		<aside>
 			<!-- Les à-cotés de la page -->
 		</aside>
 
 		<!-- Contenu textuel de la page -->
 		<section>
-			<div class="row">
+			<div class="row content">
 				<div class="col-sm-12">
-						<a class="butAdmin" href="admin/index.php">S'inscrire 
-						</a>
 						<a class="butAdmin" href="admin/index.php">Connexion <svg xmlns="http://www.w3.org/2000/svg"
 								width="36" height="36" fill="currentColor" class="bi bi-forward-fill" viewBox="0 0 16 16">
 								<path
@@ -45,6 +50,8 @@
 							</svg>
 						</a>
 				</div>
+				<br/>
+				<br/>
 				<div class="col-sm-12 text-center">
 					<?php
 
@@ -52,7 +59,8 @@
 
 					foreach ($aOfcars as $car):?>
 					    <div class="home_photos">
-							<a href="admin/view.php?id=<?= $car['id'] ?>"><img src=./images/<?= $car['image']?> alt="cars_img"></a>
+							<a href="admin/update.php?id=<?= $car['id'] ?>"><img src=./images/<?= $car['image']?> alt="cars_img"></a>
+							<h1><?= $car['modele'] ?></h1>
 					    </div>
 					<?php endforeach; ?>
 					

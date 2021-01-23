@@ -1,18 +1,20 @@
 <?php
-//  session_start();
-//   if(!isset($_SESSION['email'])){
+ session_start();
+  if(!isset($_SESSION['email'])){
     
-//     header("Location: login.php");
-// }
-
+    header("Location: login.php");
+}
+// $sMessage = "";
 require 'database.php';
 
    
-    $marqueError = $modeleError = $moteurError = $coupleError = $de_0_100km_hError = $miseEnCirculationError = $prixError = $categoryError= $imageError  = $marque = $modele = $moteur = $couple = $de_0_100km_h = $miseEnCirculation = $prix =  $category = $image ="";
+    $marqueError = $modeleError = $chevauxError = $vitesseMaxError = $moteurError = $coupleError = $de_0_100km_hError = $miseEnCirculationError = $prixError = $categoryError= $imageError  = $marque = $modele = $chevaux = $vitesseMax = $moteur = $couple = $de_0_100km_h = $miseEnCirculation = $prix =  $category = $image ="";
   if(!empty($_POST)){
       
       $marque           = checkInput($_POST['marque']);
       $modele           = checkInput($_POST['modele']);
+      $chevaux          = checkInput($_POST['chevaux']);
+      $vitesseMax       = checkInput($_POST['vitesseMax']);
       $moteur           = checkInput($_POST['moteur']);
       $couple           = checkInput($_POST['couple']);
       $de_0_100km_h     = checkInput($_POST['de_0_100km_h']);
@@ -34,6 +36,14 @@ require 'database.php';
           $modeleError = 'Ce champ ne  peut être vide';
           $isSuccess = false;
       }
+      if(empty($chevaux)){
+        $chevauxError = 'Ce champ ne  peut être vide';
+        $isSuccess = false;
+    }
+    if(empty($vitesseMax)){
+      $vitesseMaxError = 'Ce champ ne  peut être vide';
+      $isSuccess = false;
+     }
       if(empty($moteur)){
           $moteurError = 'Ce champ ne  peut être vide';
           $isSuccess = false;
@@ -89,8 +99,8 @@ require 'database.php';
       }
       if($isSuccess && $isUploadSuccess){
           $db = Database::connect();
-          $statement = $db->prepare("INSERT INTO items (marque,modele,moteur,couple,de_0_100km_h, miseEnCirculation, prix,`image`, category) values(?,?,?,?,?,?,?,?,?)");
-          $statement->execute(array( $marque,$modele,$moteur,$couple,$de_0_100km_h,$miseEnCirculation,$prix,$image,$category));
+          $statement = $db->prepare("INSERT INTO items (marque,modele,chevaux,vitesseMax,moteur,couple,de_0_100km_h, miseEnCirculation, prix,`image`, category) values(?,?,?,?,?,?,?,?,?)");
+          $statement->execute(array( $marque,$modele,$chevaux,$vitesseMax,$moteur,$couple,$de_0_100km_h,$miseEnCirculation,$prix,$image,$category));
           Database::disconnect();
         header("Location: index.php");
       }
@@ -150,6 +160,16 @@ function checkInput($data){
                               <span class="help-inline"><?= $modeleError; ?></span>
                             </div>
                             <div class="form-group">
+                              <label for="chevaux">Chevaux : </label>
+                              <input type="text" id="chevaux" name="chevaux" placeholder="300" value="<?= $chevaux; ?>">
+                              <span class="help-inline"><?= $chevauxError; ?></span>
+                            </div>
+                            <div class="form-group">
+                              <label for="vitesseMax">Vitesse max : </label>
+                              <input type="text" id="vitesseMax" name="vitesseMax" placeholder="250" value="<?= $vitesseMax; ?>">
+                              <span class="help-inline"><?= $vitesseMaxError; ?></span>
+                            </div>
+                            <div class="form-group">
                               <label for="moteur">Moteur : </label>
                               <input type="text"  id="moteur" name="moteur" placeholder="3.0L V6 24s" value="<?= $moteur; ?>">
                               <span class="help-inline"><?= $moteurError; ?></span>
@@ -160,17 +180,17 @@ function checkInput($data){
                               <span class="help-inline"><?= $coupleError; ?></span>
                             </div>
                             <div class="form-group">
-                              <label for="de_0_100km_h">Accelération de 0 à 100 km/h : </label>
+                              <label for="de_0_100km_h"> 0 à 100 km/h : </label>
                               <input type="text"  id="de_0_100km_h" name="de_0_100km_h" placeholder="3.5s" value="<?= $de_0_100km_h; ?>">
                               <span class="help-inline"><?= $de_0_100km_hError; ?></span>
                             </div>
                             <div class="form-group">
-                              <label for="miseEnCirculation">Mise en Circulation : </label>
+                              <label for="miseEnCirculation">Année : </label>
                               <input type="text" id="miseEnCirculation" name="miseEnCirculation" placeholder="2020-05-14" value="<?= $miseEnCirculation; ?>">
                               <span class="help-inline"><?= $miseEnCirculationError; ?></span>
                             </div>
                            <div class="form-group">
-                              <label for="prix">Prix:  (en €)</label>
+                              <label for="prix">Prix:(en €)</label>
                               <input type="number" step="0.01" id="prix" name="prix" placeholder="35000" value="<?= $prix; ?>">
                               <span class="help-inline"><?= $prixError; ?></span>
                            </div>
@@ -200,6 +220,7 @@ function checkInput($data){
                         <button type="submit" class="butAdmin">Ajouter</button>   
                        </div>
                     </form>
+                   <h3><?=  $sMessage ;?></h3>
                   </div>
             </div>
         </div> 

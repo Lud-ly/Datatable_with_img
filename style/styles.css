@@ -1,50 +1,127 @@
 body{
- color: whitesmoke;
- background-color: #1d1d1d!important;
+ /* color: whitesmoke; */
+ background-color: whitesmoke!important;
 }
 .admin{
   text-align: center;
   padding: 50px;
-  font-size: 25px;
+  font-size: 15px;
+}
+.home_photos h1{
+  font-size: 25px!important;
+  float: left;
 }
 .home_photos img{
+  border-radius: 5px;
   width: 75px;
   height: 45px;
   float: left;
 }
-/* Style modal saving in progress */
-#divModalSaving {
-	background-image: url("../images/chargement.gif");
-	background-repeat: no-repeat;
-	background-position: center;
-	z-index: 1000;
+
+.col-sm-10{
+  margin-top: 5em!important;
 }
-/* Style modal all space */
-.modalChanged {
-	display: none;
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-color: rgba(0, 0, 0, 0.5);
-	z-index: 1000;
+.thumbnail{
+  border: none!important;
+  border-radius: 5px;
+}
+.thumbnail>img{
+  margin: 37px;
+}
+header img{
+  background-position: center;
+}
+/* -----------------Navbar---------------------------- */
+.header {
+  padding: 30px;
+  text-align: center;
+  color: whitesmoke;
+}
+
+#navbar {
+  overflow: hidden;
+  background-color: #000;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+#navbar a:hover {
+  background-color: #333;
+  color: black;
+}
+
+#navbar a.active {
+  background-color: #333;
+  color: whitesmoke;
+}
+
+.content {
+  padding: 16px;
+}
+.content h1{
+  font-style: italic;
+  opacity: 0.5;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 60px;
+}
+/*----------------------------------------------------Button & input Form error---------------------------------------------------*/
+.form-group label{
+  color: #000;
+}
+.form-group,.form-group input,.form-group select,.form-group label{
+  height: 45px;
+} 
+input[type="file"]{
+  padding: 5px;
+  border: 1px solid #121212;
+  border-radius: 5px;
+  height: 40px!important;
+  margin: 30px;
+}
+input[type="text"]{
+margin-bottom: 0!important;
+}
+.help-inline{
+  color:rgb(202, 53, 53)!important;
 }
 button{
- width: 80%;
+ width: 50%;
  font-size: 25px!important;
  margin:0 auto!important;
  padding: 10px;
  margin: 30px!important;
  border-radius: 5px!important;
- background-color: transparent;
+ background: transparent;
  color: whitesmoke;
  text-shadow: 1px 1px #000;
- border :1px solid #658b72;
+ border :1px solid #fff;
+ transition: all 0.4s ease 0s;
 }
 button:hover{
-  text-decoration: none;
-  background-color:transparent!important;
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+  transition: all 0.4s ease 0s;
+  text-decoration: none!important;
+  background: transparent!important;
   color: #121212;
   text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
 }
@@ -55,11 +132,11 @@ button:hover{
   color: #ffffff !important;
   font-weight: 100;
   padding: 10px;
-  margin: 50px;
+  margin: 50px!important;
   text-transform: uppercase;
   border-radius: 6px;
   display: inline-block;
-  transition: all 0.3s ease 0s;
+  transition: all 0.4s ease 0s;
 }
 .butAdmin:hover{
   color: #404040 !important;
@@ -89,7 +166,7 @@ button:hover{
     -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
     -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
     transition: all 0.4s ease 0s;
-    text-decoration: none;
+    text-decoration: none!important;
     background: transparent;
     }
 .form-actions{
@@ -97,40 +174,9 @@ button:hover{
   background: none!important;
   padding: 0!important;
 }
-.col-sm-10{
-  margin-top: 5em!important;
+.mySelect select{
+  width:120px!important;
 }
-.thumbnail{
-  border: none!important;
-  border-radius: 5px;
-}
-.thumbnail>img{
-  margin: 37px;
-}
-.form-group label{
-  color: #000;
-}
-.form-group,.form-group input,.form-group select,.form-group label{
-  margin-bottom: 0px!important;
-  height: 50px;
-  cursor: pointer;
-}
-input[type="file"]{
-  padding: 5px;
-  border: 1px solid #121212;
-  border-radius: 5px;
-  margin-top: 20px!important;
-  height: 50px!important;
-  background-color: #658b72;
-}
-.help-inline{
-  color:rgb(202, 53, 53)!important;
-}
-header img{
-  background-position: center;
-}
-/*----------------------------------------------------Button & input Form---------------------------------------------------*/
-
 /*----------------------------------------------------Général datatable-----------------------------------------------*/
 .dataTables_wrapper {
   margin: 0 2em;
@@ -139,7 +185,6 @@ header img{
   font-size: 0.7em;
   text-transform: uppercase;
   margin-bottom: 2em;
-  color: whitesmoke!important;
   padding: 10px!important;
 }
 
@@ -193,8 +238,8 @@ table.cards {
 }
 .cards tbody tr {
   float: left;
-  width: 22%;
-  height: 280px;
+  width: 25%;
+  height: 255px;
   position: relative;
   overflow: hidden;
   margin-bottom: 1px;
@@ -242,7 +287,7 @@ table.cards {
   opacity: 0.75;
   text-transform: uppercase;
   border: transparent !important;
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.30);
   padding: 5px;
   position: absolute;
   bottom: 0;
@@ -263,7 +308,6 @@ table.cards {
   top: -5px;
   left: -3px;
   float: left;
-  color: whitesmoke;
 }
 .cards tbody td:nth-child(1) {
   text-align: center;
@@ -292,16 +336,23 @@ select.nav {
 .nav a:hover{
 color: #658b72;
 }
-.parking,.ajoutParking{
+
+.parking,.ajoutParking,.conn{
   background:url(../images/parking.jpg)no-repeat;
   background-size:cover,cover;
 }
 .admin h1{
   text-shadow: 1px 1px rgb(170, 169, 169);
+  margin-bottom: 50px!important;
 }
 .myTable{
-  background:url(../images/plymouth.jpg)no-repeat;
-  /* background-size:cover,cover; */
+  background-color: whitesmoke;
+  /* background:url(../images/pilepneus.png)no-repeat;
+  background-size:cover,cover; */
+}
+.c_hello,.c_delete{
+  background:url(../images/car.jpg)no-repeat;
+  background-size:cover,cover;
 }
 /* Portrait tablets and small desktops */
 @media (max-width: 1200px) {
