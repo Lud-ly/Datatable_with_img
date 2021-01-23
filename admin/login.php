@@ -21,7 +21,7 @@ session_start();
           header("Location: index.php");
     }
       else{
-          $error = "Votre mot de passe ou email sont incorrects";
+          $error = "Votre mot de passe ou email est incorrect";
       }
 }
 
@@ -57,40 +57,24 @@ function checkInput($data){
     <body class="c_hello">
         <div class="container admin">
             <div class="row">
-            <div class="login-page">
-      <div class="form">
-        <div class="login">
-          <div class="login-header">
-                 <a class="login-form" href="./index.php"> Retour</a>
-            <h3>LOGIN</h3>
-            <p>Please enter your credentials to login.</p>
-          </div>
-        </div>
-        <form class="login-form">
-          <input type="text" placeholder="username"/>
-          <input type="password" placeholder="password"/>
-          <button>login</button>
-          <p class="message">Not registered? <a href="registration.php">Create an account</a></p>
-        </form>
-      </div>
-    </div>
-                <h1><strong>Login </strong></h1>
-                <br>
-                <a class="button" href="/index.php"> Retour</a>
-                <form class="form" role="form" action="login.php" method="post">
-                    <div class="form-group">
-                        <label for="name">Email : </label>
-                        <input type="email"  id="email" name="email" placeholder="email" value="<?php echo $email; ?>">       
-                    </div>
-                    <div class="form-group">
-                            <label for="password">Mot de passe : </label>
+                <div class="login-page">
+                    <div class="form">
+                        <div class="login">
+                            <div class="login-header">
+                                   <a href="../index.php"> Retour</a> 
+                                <h3>LOGIN</h3>
+                                <p>Please enter your credentials to login.</p>
+                            </div>
+                        </div>
+                        <form class="login-form" role="form" action="login.php" method="post">
+                            <input type="email"  id="email" name="email" placeholder="email" value="<?php echo $email; ?>">   
                             <input type="password"  id="password" name="password"  value="<?php echo $password; ?>" placeholder="Mot de passe">
+                            <span class="help-inline"><?php echo $error; ?></span>
+                            <button  type="submit">Se connecter</button>
+                            <p class="message">Not registered? <a href="registration.php">Create an account</a></p>
+                        </form>
                     </div>
-                    <span class="help-inline"><?php echo $error; ?></span>
-                    <div class="form-actions">
-                        <button type="submit" class="button"> Se connecter</button> 
-                    </div>
-                </form>
+                </div>
             </div>
         </div> 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
